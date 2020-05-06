@@ -6,8 +6,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-
 public class Book {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -19,21 +19,16 @@ public class Book {
     private Publisher publisher;
 
     @ManyToMany
-    @JoinTable(name = "author_book", joinColumns = @JoinColumn(name="book_id"),
-        inverseJoinColumns = @JoinColumn(name="author_id"))
+    @JoinTable(name = "author_book", joinColumns = @JoinColumn(name = "book_id"),
+            inverseJoinColumns = @JoinColumn(name = "author_id"))
     private Set<Author> authors = new HashSet<>();
+
+    public Book() {
+    }
 
     public Book(String title, String isbn) {
         this.title = title;
         this.isbn = isbn;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public Publisher getPublisher() {
@@ -52,14 +47,11 @@ public class Book {
         this.id = id;
     }
 
-    public Book() {
-    }
-
-    public String getTittle() {
+    public String getTitle() {
         return title;
     }
 
-    public void setTittle(String title) {
+    public void setTitle(String title) {
         this.title = title;
     }
 
@@ -85,7 +77,6 @@ public class Book {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", isbn='" + isbn + '\'' +
-                ", authors=" + authors +
                 '}';
     }
 
