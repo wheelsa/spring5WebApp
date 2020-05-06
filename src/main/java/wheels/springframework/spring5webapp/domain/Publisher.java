@@ -1,9 +1,8 @@
 package wheels.springframework.spring5webapp.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 
@@ -18,6 +17,10 @@ public class Publisher {
     private String state;
     private String zipcode;
 
+    @OneToMany
+    @JoinColumn(name = "publisher_id")
+    private Set<Book> books = new HashSet<>();
+
     public Publisher(String addressLine1, String city, String state, String zipcode, String name) {
         this.addressLine1 = addressLine1;
         this.city = city;
@@ -29,6 +32,14 @@ public class Publisher {
 
     public Publisher() {
     } //jpa requires
+
+    public Set<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(Set<Book> books) {
+        this.books = books;
+    }
 
     public String getName() {
         return name;
